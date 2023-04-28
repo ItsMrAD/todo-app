@@ -38,20 +38,24 @@ while True:
             print('Your Command Is Not Valid')
             continue
     elif user_action.startswith("complete"):
-        with open('todos.txt', 'r') as file:
-            todos = file.readlines()
-        number = int(user_action[9:])
+        try:
+            with open('todos.txt', 'r') as file:
+                todos = file.readlines()
+            number = int(user_action[9:])
 
-        index = number - 1
-        todo_to_remove = todos[index].strip('\n')
+            index = number - 1
+            todo_to_remove = todos[index].strip('\n')
 
-        todos.pop(index)
+            todos.pop(index)
 
-        with open('todos.txt', 'w') as file:
-            todos = file.writelines(todos)
+            with open('todos.txt', 'w') as file:
+                todos = file.writelines(todos)
 
-        message = f"{todo_to_remove.title()} was removed from the list"
-        print(message)
+            message = f"{todo_to_remove.title()} was removed from the list"
+            print(message)
+        except IndexError:
+            print('There Is No Item With That Number')
+            continue
     elif user_action.startswith("exit"):
         break
     else:
