@@ -2,17 +2,17 @@ while True:
     user_action = input("type add, show, edit, complete or exit: ")
     user_action = user_action.strip()
 
-    if 'add' in user_action:
-        todo = user_action[4:] + '\n'
+    if user_action.startswith("add"):
+        todo = user_action[4:]
 
         with open('todos.txt', 'r') as file:
             todos = file.readlines()
 
-        todos.append(todo)
+        todos.append(todo + '\n')
 
         with open('todos.txt', 'w') as file:
             file.writelines(todos)
-    elif 'show' in user_action:
+    elif user_action.startswith("show"):
 
         with open('todos.txt', 'r') as file:
             todos = file.readlines()
@@ -21,20 +21,23 @@ while True:
             item = item.strip("\n")
             row = f"{index + 1}-{item.title()}"
             print(row)
-    elif 'edit' in user_action:
-        number = int(user_action[5:])
+    elif user_action.startswith("edit"):
+        try:
+            number = int(user_action[5:])
+            number = number - 1
 
-        with open('todos.txt', 'r') as file:
-            todos = file.readlines()
+            with open('todos.txt', 'r') as file:
+                todos = file.readlines()
 
-        number = number - 1
+            new_todo = input("Enter New Todo: ")
+            todos[number] = new_todo + '\n'
 
-        new_todo = input("Enter New Todo: ")
-        todos[number] = new_todo + '\n'
-
-        with open('todos.txt', 'w') as file:
-            file.writelines(todos)
-    elif 'complete' in user_action:
+            with open('todos.txt', 'w') as file:
+                file.writelines(todos)
+        except ValueError:
+            print('Your Command Is Not Valid')
+            continue
+    elif user_action.startswith("complete"):
         with open('todos.txt', 'r') as file:
             todos = file.readlines()
         number = int(user_action[9:])
@@ -49,7 +52,7 @@ while True:
 
         message = f"{todo_to_remove.title()} was removed from the list"
         print(message)
-    elif 'exit' in user_action:
+    elif user_action.startswith("exit"):
         break
     else:
         print('Command is not valid')
