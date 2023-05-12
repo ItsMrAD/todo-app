@@ -21,6 +21,7 @@ while True:
         todos.append(todo + '\n')
 
         write_todos('todos.txt', todos)
+        # this means write_todos(filepath='todos.txt', todos_arg=todos)
     elif user_action.startswith("show"):
 
         todos = get_todos("todos.txt")
