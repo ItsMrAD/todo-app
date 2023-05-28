@@ -1,6 +1,7 @@
 from cli import converter
 import PySimpleGUI as sg
 
+sg.theme("Black")
 label1 = sg.Text("Enter feet:")
 input_feet = sg.Input(key="feet")
 
@@ -10,17 +11,23 @@ input_inches = sg.Input(key="inches")
 button = sg.Button("Convert")
 output_label = sg.Text(key="output", text_color="white")
 
+exit_button = sg.Button("Exit")
+
 window = sg.Window("Convertor",
                    layout=[[label1, input_feet],
                            [label2, input_inches],
-                           [button, output_label]])
+                           [button, exit_button, output_label]])
 
 while True:
     event, values = window.read()
     #
     # My code start:
-    if event == sg.WIN_CLOSED or event == "Exit":
-        break
+
+    match event:
+        case "Exit":
+            break
+        case sg.WIN_CLOSED:
+            break
     if values['feet'] or values['inches'] is not None:
         print(event, values)
         feet_input = values['feet']
@@ -28,6 +35,7 @@ while True:
         meters = converter(feet_input, inches_input)
         print(meters)
         window["output"].update(value=meters)
+
     #
     #
     # feet = float(values["feet"])
