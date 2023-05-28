@@ -1,7 +1,7 @@
-eat dinner
-learn python
+eat breakfast
 fix the computer
 eat lunch
 learn stock
 do work
 drink coffee
+learn python
