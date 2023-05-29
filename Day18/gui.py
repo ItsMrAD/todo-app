@@ -23,9 +23,9 @@ edit_button = sg.Button(size=10, image_source="edit.png",
 complete_button = sg.Button(size=10, image_source="complete.png",
                             mouseover_colors="LightBlue2",
                             tooltip="Complete Todo", key="Complete")
-exit_button = sg.Button(size=10, image_source="exit.png",
+exit_button = sg.Button(size=10, key="Exit", image_source="exit.png",
                         mouseover_colors="LightBlue2",
-                        tooltip="Exit Program", key="Exit")
+                        tooltip="Exit Program")
 
 window = sg.Window('My To-Do App',
                    layout=[[clock, exit_button],
